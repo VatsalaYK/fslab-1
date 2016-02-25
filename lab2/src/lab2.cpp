@@ -30,10 +30,10 @@ public:
 	  }
 	  void showstudent()
 	  {
-		  cout<<"\nusn:"<<usn<<endl;
-		  cout<<"\nname:"<<name<<endl;
-		  cout<<"\nbranch:"<<branch<<endl;
-		  cout<<"\nsemester:"<<semester<<endl;
+		  cout<<"usn:"<<usn<<endl;
+		  cout<<"name:"<<name<<endl;
+		  cout<<"branch:"<<branch<<endl;
+		  cout<<"semester:"<<semester<<endl;
 	  }
 	  void pack()
 	  {
@@ -42,45 +42,49 @@ public:
 		  int i;
 
 				  temp=usn+'|'+name+'|'+branch+'|'+semester;
-				  buffer=temp;
+				 // buffer=temp;
 	     for(i=temp.size();i<100;i++)
 
-	       buffer+='$';
+	       temp+='$';
 
-
+	     buffer+=temp;
 	     cout<<buffer<<endl;
 	  }
 	  void write()
 	  {
 		  fstream f1;
 
-		  f1.open("Data.txt",ios::out|ios::app);
+		  f1.open("Data22.txt",ios::out|ios::app);
 		  f1<<buffer;
+		  f1<<endl;
 		  f1.close();
 	  }
 	  int search(string key)
 	  {
 		  fstream f1;
 		  int pos;
-		  f1.open("Data.txt",ios::in);
-		  getline(f1,buffer);
-		  pos=f1.tellp();
-		  unpack();
-		  if(usn==key)
+		  f1.open("Data22.txt",ios::in);
+		  while(!f1.eof())
 		  {
+			  getline(f1,buffer);
+			  pos=f1.tellp();
+			  unpack();
+			  if(usn==key)
+			  {
 
-			  cout<<"found the record"<<endl;
-		  }
-		  else
-		  {
-			  cout<<"record not found"<<endl;
+				  cout<<"found the record"<<endl;
+				  return pos;
+			  }
 
 		  }
-		  return pos;
+		  cout<<"Record not found"<<endl;
+		  f1.close();
+
 	 }
 	 void unpack()
 	 {
        int i=0;
+       usn.erase();
        while(buffer[i]!='|')
        usn+=buffer[i++];
        i++;
@@ -90,16 +94,54 @@ public:
        while(buffer[i]!='|')
        branch+=buffer[i++];
        i++;
-       while(buffer[i]!='|')
+       while(buffer[i]!='$')
        semester+=buffer[i++];
        i++;
+	 }
+	 void modify()
+	 {
+		 int ch;
+		 string key;
+		 cout<<"Enter the key to modify ; "<<endl;
+		 cin>>key;
+		 search(key);
+		 //del(key);
+		 cout<<"1.INSERT USN"<<endl<<"2.INSERT NAME"<<endl<<"3.INSERT BRANCH"<<endl<<"4.INSERT SEMESTER"<<endl;
+		 cout<<"Enter your choice: ";
+		 cin>>ch;
+		 switch(ch)
+		 {
+		 case 1:
+			 cout<<"Enter the USN : "<<endl;
+			 cin>>usn;
+			 break;
+		 case 2:
+			 cin.clear();
+			 cin.ignore(255,'\n');
+			 cout<<"Enter the name "<<endl;
+			 getline(cin,name);
+			 break;
+		 case 3:
+		 		cin.clear();
+		 		cin.ignore(255,'\n');
+		 		cout<<"Enter the branch "<<endl;
+		 		getline(cin,branch);
+		 		break;
+		 case 4:
+			 cout<<"Enter the sem"<<endl;
+			 cin>>semester;
+			 break;
+		 }
+		 pack();
+		 write();
 	 }
 
 };
 
 int main()
 {
-	int choice;
+	int choice,i;
+	string key;
 	student s;
   while(1)
   {
@@ -108,14 +150,21 @@ int main()
 	  cin>>choice;
       switch(choice)
 		{
-		  case 1:s.readfromconsole();
+		  case 1:
+			  s.readfromconsole();
 		       s.showstudent();
 		       s.pack();
 		       s.write();
-		       break;
+		           break;
 		  case 2:
-		         i=s.search(key);
-		         break;
+
+		  	  	  cout<<"Enter the key ; "<<endl;
+		  	  	  cin>>key;
+		          s.search(key);
+		       break;
+		  case 3:
+			  s.modify();
+			  break;
 
 		  default:return 0;
 		 }
