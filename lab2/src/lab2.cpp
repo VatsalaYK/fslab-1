@@ -1,7 +1,7 @@
 #include <iostream>
 #include<string>
 #include<fstream>
-//hellluuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+//hellluuuuuuu
 using namespace std;
 class student
 {
@@ -16,13 +16,12 @@ public:
 	  {
 		cin.clear();
 		cin.ignore(255,'\n');
-	    cin.clear();
 	    cout<<"Enter the name"<<endl;
 	    getline(cin,name);
-	    cin.clear();
-	    cin.ignore(255,'\n');
 	    cout<<"Enter the usn"<<endl;
 	    cin>>usn;
+	    cin.clear();
+	    cin.ignore(255,'\n');
 	    cout<<"Enter the branch"<<endl;
 	    cin>>branch;
 	    cout<<"Enter the semester"<<endl;
@@ -41,21 +40,18 @@ public:
 		  string temp,sem1;
 
 		  int i;
-
-				  temp=usn+'|'+name+'|'+branch+'|'+semester;
-				 // buffer=temp;
-	     for(i=temp.size();i<100;i++)
-
-	       temp+='$';
-
-	     buffer+=temp;
-	     cout<<buffer<<endl;
+		  temp.erase();
+		  temp+=usn+'|'+name+'|'+branch+'|'+semester;
+	      for(i=temp.size();i<100;i++)
+	      temp+='$';
+	      buffer+=temp;
+	      cout<<buffer<<endl;
 	  }
 	  void write()
 	  {
 		  fstream f1;
 
-		  f1.open("Data22.txt",ios::out|ios::app);
+		  f1.open("Data10.txt",ios::out|ios::app);
 		  f1<<buffer;
 		  f1<<endl;
 		  f1.close();
@@ -64,22 +60,30 @@ public:
 	  {
 		  fstream f1;
 		  int pos;
-		  f1.open("Data22.txt",ios::in);
+		  f1.open("Data10.txt",ios::in);
 		  while(!f1.eof())
 		  {
+			  buffer.erase();
 			  getline(f1,buffer);
 			  pos=f1.tellp();
 			  unpack();
 			  if(usn==key)
 			  {
-
 				  cout<<"found the record"<<endl;
+				  pos=f1.tellp();
+				  pos=pos-101;
+				  cout<<"pos="<<pos<<endl;
+				  cout<<"USN :"<<usn<<endl;
+				  cout<<"Name :"<<name<<endl;
+				  cout<<"Branch :"<<branch<<endl;
+				  cout<<"Semester :"<<semester<<endl;
 				  return pos;
 			  }
 
 		  }
 		  cout<<"Record not found"<<endl;
 		  f1.close();
+		  return 0;
 
 	 }
 	 void unpack()
@@ -89,12 +93,15 @@ public:
        while(buffer[i]!='|')
        usn+=buffer[i++];
        i++;
+       name.erase();
        while(buffer[i]!='|')
        name+=buffer[i++];
        i++;
+       branch.erase();
        while(buffer[i]!='|')
        branch+=buffer[i++];
        i++;
+       semester.erase();
        while(buffer[i]!='$')
        semester+=buffer[i++];
        i++;
@@ -107,7 +114,10 @@ public:
 		 cin>>key;
 		 search(key);
 		 //del(key);
-		 cout<<"1.INSERT USN"<<endl<<"2.INSERT NAME"<<endl<<"3.INSERT BRANCH"<<endl<<"4.INSERT SEMESTER"<<endl;
+		 cout    <<"1.INSERT USN"<<endl
+				 <<"2.INSERT NAME"<<endl
+				 <<"3.INSERT BRANCH"<<endl
+				 <<"4.INSERT SEMESTER"<<endl;
 		 cout<<"Enter your choice: ";
 		 cin>>ch;
 		 switch(ch)
@@ -146,7 +156,10 @@ int main()
 	student s;
   while(1)
   {
-	  cout<<"1.INSERT"<<endl<<"2.SEARCH"<<endl<<"3.DELETE"<<endl<<"4.MODIFY"<<endl;
+	  cout    <<"1.INSERT"<<endl
+			  <<"2.SEARCH"<<endl
+			  <<"3.DELETE"<<endl
+			  <<"4.MODIFY"<<endl;
 	  cout<<"Enter your choice";
 	  cin>>choice;
       switch(choice)
@@ -161,11 +174,14 @@ int main()
 
 		  	  	  cout<<"Enter the key ; "<<endl;
 		  	  	  cin>>key;
-		          s.search(key);
+		         i= s.search(key);
 		       break;
 		  case 3:
-			  s.modify();
+			 //delete not done as of now
 			  break;
+		  case 4:
+			      s.modify();
+			 	  break;
 
 		  default:return 0;
 		 }
