@@ -1,6 +1,7 @@
 #include <iostream>
 #include<string>
 #include<fstream>
+#include<sstream>
 //hellluuuuuuu
 using namespace std;
 class student
@@ -41,6 +42,7 @@ public:
 
 		  int i;
 		  temp.erase();
+		  buffer.erase();
 		  temp+=usn+'|'+name+'|'+branch+'|'+semester;
 	      for(i=temp.size();i<100;i++)
 	      temp+='$';
@@ -63,26 +65,27 @@ public:
 		  f1.open("Data10.txt",ios::in);
 		  while(!f1.eof())
 		  {
-			  buffer.erase();
+			  //buffer.erase();
 			  getline(f1,buffer);
 			  pos=f1.tellp();
 			  unpack();
 			  if(usn==key)
 			  {
 				  cout<<"found the record"<<endl;
-				  pos=f1.tellp();
-				  pos=pos-101;
+				 // pos=f1.tellp();
+				//  pos=pos-101;
 				  cout<<"pos="<<pos<<endl;
 				  cout<<"USN :"<<usn<<endl;
 				  cout<<"Name :"<<name<<endl;
 				  cout<<"Branch :"<<branch<<endl;
 				  cout<<"Semester :"<<semester<<endl;
+				  f1.close();
 				  return pos;
 			  }
 
 		  }
-		  cout<<"Record not found"<<endl;
-		  f1.close();
+		  //cout<<"Record not found"<<endl;
+		  //f1.close();
 		  return 0;
 
 	 }
@@ -106,14 +109,16 @@ public:
        semester+=buffer[i++];
        i++;
 	 }
-	 void modify()
+	 void modify(string key)
 	 {
-		 int ch;
-		 string key;
-		 cout<<"Enter the key to modify ; "<<endl;
+		 int ch,pos;
+		// string key;
+		 fstream fp1;
+		 pos=search(key);
+		/* cout<<"Enter the key to modify ; "<<endl;
 		 cin>>key;
 		 search(key);
-		 //del(key);
+		 //del(key);*/
 		 cout    <<"1.INSERT USN"<<endl
 				 <<"2.INSERT NAME"<<endl
 				 <<"3.INSERT BRANCH"<<endl
@@ -145,8 +150,12 @@ public:
 		 }
 		 pack();
 		 write();
-	 }
+		 pos=pos-101;
+		 fp1.open("Data10.txt");
+		 fp1.seekp(pos,ios::beg);
+		 fp1<<buffer;
 
+	 }
 };
 
 int main()
@@ -174,13 +183,19 @@ int main()
 
 		  	  	  cout<<"Enter the key ; "<<endl;
 		  	  	  cin>>key;
-		         i= s.search(key);
+		          i= s.search(key);
+		          if(i!=0)
+		        	  cout<<"Found at "<<i-101;
+		          else
+		        	  cout<<"Not found";
 		       break;
 		  case 3:
 			 //delete not done as of now
 			  break;
 		  case 4:
-			      s.modify();
+			  	  cout<<"Enter key "<<endl;
+			  	  cin>>key;
+			      s.modify(key);
 			 	  break;
 
 		  default:return 0;
