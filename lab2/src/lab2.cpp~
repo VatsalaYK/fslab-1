@@ -1,7 +1,6 @@
 #include <iostream>
 #include<string>
 #include<fstream>
-//hellluuuuuuuuuuuuuuuuuuuuuuuuuuuuu
 using namespace std;
 class student
 {
