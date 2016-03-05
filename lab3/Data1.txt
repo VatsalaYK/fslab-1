@@ -1,0 +1,6 @@
+500|vatsala|ise|3@
+600|varsha|cse|2@
+700|vidya|ece|3@
+220|jill|eee|1@
+444|bill|ise|4@
+234|john|tce|4@

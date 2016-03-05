@@ -73,12 +73,13 @@ public:
 	  {
 			  fstream f1;
 			  int pos;
+			  string g_usn;
 			  f1.open("Data1.txt",ios::in);
 			  while(!f1.eof())
 			  {
 				  getline(f1,buffer);
 				  pos=f1.tellp();
-				  unpack();
+				 g_usn= unpack();
 				  if(usn==key)
 				  {
 					  cout<<"found the record"<<endl;
@@ -141,7 +142,7 @@ public:
 	 void modify(string key)
 	 {
 				 int ch,pos;
-				 fstream fp1;
+				 fstream f1;
 				 pos=search(key);
 				 if(pos<1)return;
 				 cout<<"Record is modified at the position :"<<pos<<endl;
@@ -191,11 +192,12 @@ public:
 				 }
 				 write();
 				 pos=pos-(buffer.size()-1);
-				 fp1.open("Data10.txt");
-				 fp1.seekp(pos,ios::beg);
-				 fp1<<buffer;
-				 fp1<<endl;
-				 fp1.close();
+				 f1.open("Data10.txt");
+				 f1.seekp(pos,ios::beg);
+				 f1<<buffer;
+				 f1<<endl;
+				 f1.close();
+	 }
 };
 
 int main()
@@ -206,14 +208,14 @@ int main()
 	while(1)
 	{
 			cout<<"1.INSERT"<<endl
-			  <<"2.SEARCH"<<endl
-			  <<"3.DELETE"<<endl
-			  <<"4.MODIFY"<<endl;
-			  cout<<"Enter your choice"<<endl;
-			  cin>>choice;
-			  switch(choice)
+			    <<"2.SEARCH"<<endl
+			    <<"3.DELETE"<<endl
+			    <<"4.MODIFY"<<endl;
+			    cout<<"Enter your choice"<<endl;
+			    cin>>choice;
+			    switch(choice)
 				{
-						  case 1:
+						 case 1:
 
 							   s.readfromconsole();
 							   s.showstudent();
