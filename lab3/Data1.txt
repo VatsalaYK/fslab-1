@@ -1,6 +1,8 @@
-500|vatsala|ise|3@
-600|varsha|cse|2@
-700|vidya|ece|3@
-220|jill|eee|1@
-444|bill|ise|4@
-234|john|tce|4@
+111|vatsala|ise|1@
+113|vidya|cse|2@
+95|sneha|ise|1@
+104|sush|cse|2@
+106|swe|tce|3@
+98|soni|ise|2@
+1|vatsa|se|2@
+111|vat|12w|1@
