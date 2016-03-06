@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : lab3.cpp
+// Name        : lab2.cpp
 // Author      : Vatsala Y K
 // Version     : C++
 // Copyright   : Your copyright notice
@@ -141,7 +141,7 @@ public:
 			 break;
 		 case 2:
 			 cin.clear();
-			 cin.ignore(255,'\n');
+			cin.ignore(255,'\n');
 			 cout<<"Enter the name "<<endl;
 			 getline(cin,name);
 			 break;
@@ -157,7 +157,7 @@ public:
 			 break;
 		 }
 		 pack();
-		 write();
+		// write();
 		 pos=pos-101;
 		 fp1.open("Data10.txt");
 		 fp1.seekp(pos,ios::beg);
