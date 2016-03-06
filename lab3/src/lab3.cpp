@@ -134,7 +134,7 @@ int main()
 		student s;
 		while(1)
 		{
-		cout    <<"1.INSERT"<<endl
+		cout    <<"1.IiNSERT"<<endl
 				<<"2.SEARCH"<<endl
 				<<"3.MODIFY"<<endl;
 		cout<<"Enter your choice";
