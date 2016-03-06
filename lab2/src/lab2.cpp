@@ -1,8 +1,16 @@
+//============================================================================
+// Name        : lab3.cpp
+// Author      : Vatsala Y K
+// Version     : C++
+// Copyright   : Your copyright notice
+// Description : Fixed length record
+//============================================================================
+
 #include <iostream>
 #include<string>
 #include<fstream>
 #include<sstream>
-//hellluuuuuuu
+
 using namespace std;
 class student
 {
