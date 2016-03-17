@@ -5,6 +5,8 @@
 // Copyright   : Your copyright notice
 // Description : Variable length record
 //============================================================================
+
+
 #include <iostream>
 #include<string>
 #include<fstream>
@@ -35,7 +37,7 @@ void student::read()
 void student::pack()
 {
 		string temp;
-		int i;
+		//int i;
 		temp.erase();
 		buffer.erase();
 		temp+=usn+'|'+name+'|'+branch+'|'+sem+'$';
@@ -59,8 +61,8 @@ int student::search(string key)
 		f1.open("Data01.txt",ios::in);
 		while(!f1.eof())
 		{
-			getline(f1,buffer);
 			pos=f1.tellp();
+			getline(f1,buffer);
 			unpack();
 			if(usn==key)
 			{
@@ -97,7 +99,7 @@ void student::modify(string key)
 		int ch,pos;
 		fstream f1;
 		pos=search(key);
-		if(pos<1)return;
+		if(pos<=0)return;
 		cout<<"Record modified at position :"<<pos<<endl;
 		cout<<"Enter choice for modification :"<<endl;
 		cout<<"1.USN"<<endl<<"2.NAME"<<endl<<"3.BRANCH"<<endl<<"4.SEMESTER"<<endl;
@@ -129,7 +131,6 @@ void student::modify(string key)
 						cout<<"Enter a valid choice"<<endl;
 				}
 				pack();
-				pos=pos-(buffer.size()+1);
 				f1.open("Data01.txt");
 				f1.seekp(pos,ios::beg);
 				f1<<buffer;
@@ -143,7 +144,7 @@ int main()
 		student s;
 		while(1)
 		{
-				cout    <<"1.INSERT"<<endl
+				cout    <<"\n1.INSERT"<<endl
 						<<"2.SEARCH"<<endl
 						<<"3.MODIFY"<<endl;
 				cout<<"Enter your choice";
@@ -160,8 +161,8 @@ int main()
 							cout<<"Enter the key ; "<<endl;
 							cin>>key;
 							i= s.search(key);
-							if(i!=0)
-									cout<<"Found at "<<i-101;
+							if(i>=0)
+									cout<<"Found at "<<i;
 							else
 									cout<<"Not found";
 							break;
