@@ -1,7 +1,7 @@
 
 //============================================================================
-// Name        : Vatsala Y k
-// Author      :
+// Name        : lab4.cpp
+// Author      : Vatsala Y k
 // Version     : C++
 // Copyright   : Your copyright notice
 // Description : RRN in C++, Ansi-style
