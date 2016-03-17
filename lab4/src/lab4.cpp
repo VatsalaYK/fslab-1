@@ -1,13 +1,7 @@
-//============================================================================
-// Name        : lab4.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
 
 //============================================================================
-// Name        : Vatsala Y k // Author      :
+// Name        : Vatsala Y k
+// Author      :
 // Version     : C++
 // Copyright   : Your copyright notice
 // Description : RRN in C++, Ansi-style
