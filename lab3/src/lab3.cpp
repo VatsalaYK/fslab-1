@@ -25,14 +25,19 @@ class student
 };
 void student::read()
 {
-		cout<<"Enter the name"<<endl;
-		cin>>name;
-		cout<<"Enter the usn"<<endl;
-		cin>>usn;
-		cout<<"Enter the branch"<<endl;
-		cin>>branch;
-		cout<<"Enter the semester"<<endl;
-		cin>>sem;
+			cin.clear();
+			cin.ignore(255,'\n');
+			cout<<"Enter the name"<<endl;
+			getline(cin,name);
+			cout<<"Enter the usn"<<endl;
+			cin>>usn;
+			cin.clear();
+			cin.ignore(255,'\n');
+			cout<<"Enter the branch"<<endl;
+			getline(cin,branch);
+			cout<<"Enter the semester"<<endl;
+			cin>>sem;
+
 }
 void student::pack()
 {
@@ -48,7 +53,7 @@ void student::pack()
 void student::write()
 {
 		fstream f1;
-		f1.open("Data01.txt",ios::out|ios::app);
+		f1.open("Data1.txt",ios::out|ios::app);
 		f1<<buffer;
 		f1<<endl;
 		f1.close();
@@ -58,7 +63,7 @@ int student::search(string key)
 		fstream f1;
 		int pos;
 		buffer.erase();
-		f1.open("Data01.txt",ios::in);
+		f1.open("Data1.txt",ios::in);
 		while(!f1.eof())
 		{
 			pos=f1.tellp();
@@ -113,13 +118,17 @@ void student::modify(string key)
 						cout<<endl;
 						break;
 				case 2:
+						cin.clear();
+						cin.ignore(255,'\n');
 						cout<<"Enter the name "<<endl;
-						cin>>name;
+						getline(cin,name);
 						cout<<endl;
 						break;
 				case 3:
+						cin.clear();
+						cin.ignore(255,'\n');
 						cout<<"Enter the branch "<<endl;
-						cin>>branch;
+						getline(cin,branch);
 						cout<<endl;
 						break;
 				case 4:
@@ -131,7 +140,7 @@ void student::modify(string key)
 						cout<<"Enter a valid choice"<<endl;
 				}
 				pack();
-				f1.open("Data01.txt");
+				f1.open("Data1.txt");
 				f1.seekp(pos,ios::beg);
 				f1<<buffer;
 				f1<<endl;
