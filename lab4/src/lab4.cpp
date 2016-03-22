@@ -29,7 +29,7 @@ public:
 		cin.clear();
 		cin.ignore(255,'\n');
 		cout<<"Enter the branch"<<endl;
-		cin>>branch;
+		getline(cin,branch);
 		cout<<"Enter the semester"<<endl;
 		cin>>sem;
 
