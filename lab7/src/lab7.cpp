@@ -30,13 +30,17 @@ void coseq::read(int j)
 	int i,n;
 	cout<<"Enter the number of names to enter in list-"<<j<<endl;
 	cin>>n;
+	buffer.erase();
 	for(i=0;i<n;i++)
 	{
-		buffer.erase();
+		//buffer.erase();
 		cout<<"Enter the Name: "<<endl;
 		cin>>name;
 		buffer+=name;
+		buffer+="\n";
+		//cout<<buffer<<endl;
 	}
+	//cout<<buffer<<endl;                      //buffer contents
 }
 void coseq::insert(char file1[mx],char file2[mx])
 {
@@ -44,12 +48,14 @@ void coseq::insert(char file1[mx],char file2[mx])
 	//int b=2;	
 	fstream fp;
 	read(1);
+	cout<<"Contents if file 1 "<<endl<<buffer;
 	fp.open(file1,ios::out|ios::app);
-	fp<<buffer<<endl;
+	fp<<buffer;
 	fp.close();
 	read(2);
+	cout<<"Contents of file 2 "<<endl<<buffer;
 	fp.open(file2,ios::out|ios::app);
-	fp<<buffer<<endl;
+	fp<<buffer;
 	fp.close();
 }
 void coseq::load(char file1[mx],char file2[mx])
@@ -62,10 +68,11 @@ void coseq::load(char file1[mx],char file2[mx])
 	{
 		getline(fp,name);
 		a[i]=name;
+		cout<<"Count of 'i' for file 1 is "<<i<<endl; //count of i
 		i++;
 		count1++;
 	}
-	cout<<"Count 1 is "<<count1<<endl;
+	//cout<<"Count 1 is "<<count1<<endl;
 	cout<<"Contents of file 1 are:"<<endl;
 	for(i=0;i<count1;i++)
         cout<<a[i]<<endl;
@@ -78,9 +85,10 @@ void coseq::load(char file1[mx],char file2[mx])
 		getline(fp,name);
 		b[i]=name;
 		i++;
+		cout<<"Count of 'i' for file 2 is"<<i<<endl;    //count of i
 		count2++;
 	}
-	cout<<"Count 2 is "<<count2<<endl;
+	//cout<<"Count 2 is "<<count2<<endl;
 	cout<<"Contents of file 2 are:"<<endl;
 	for(i=0;i<count2;i++)
         cout<<b[i]<<endl;
