@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : lab9.cpp
-// Author      : Vatsala Y K
-// Version     : C++
-// Copyright   : Your copyright notice
-// Description : Reclaiming space in records
-//============================================================================
-
 
 //------incomplete code------//
 
@@ -15,6 +7,7 @@
 #include<string>
 #include<fstream>
 #include<sstream>
+#include<stdlib.h>
 
 using namespace std;
 class student
@@ -95,7 +88,7 @@ public:
 			}
 			pos=q->address;
 			p->link=NULL;
-			f1.seek(pos,ios::beg);
+			f1.seekp(pos,ios::beg);
 			f1<<buffer;
 		}
 		f1.close();
@@ -110,7 +103,7 @@ public:
 			cout<<"File is not available"<<endl;
 			return 0;
 		}
-		  while(!f1.eof())
+		  while(!f2.eof())
 		  {
 			  buffer.erase();
 			  getline(f2,buffer);
@@ -161,51 +154,49 @@ public:
        semester+=buffer[i++];
        i++;*/
 	 }
-	 void modify(string key)//delete not done
+	 int del(string key)//delete not done
 	 {
-		 int ch,pos;
+		 int ch,pos,flag=0;
+		char del_mark='*',t;
+		node *p;
 		// string key;
 		 fstream fp1;
 		 pos=search(key);
-		/* cout<<"Enter the key to modify ; "<<endl;
-		 cin>>key;
-		 search(key);
-		 //del(key);*/
-		 cout    <<"1.INSERT USN"<<endl
-				 <<"2.INSERT NAME"<<endl
-				 <<"3.INSERT BRANCH"<<endl
-				 <<"4.INSERT SEMESTER"<<endl;
-		 cout<<"Enter your choice: ";
-		 cin>>ch;
-		 switch(ch)
-		 {
-		 case 1:
-			 cout<<"Enter the USN : "<<endl;
-			 cin>>usn;
-			 break;
-		 case 2:
-			 cin.clear();
-			 cin.ignore(255,'\n');
-			 cout<<"Enter the name "<<endl;
-			 getline(cin,name);
-			 break;
-		 case 3:
-		 		cin.clear();
-		 		cin.ignore(255,'\n');
-		 		cout<<"Enter the branch "<<endl;
-		 		getline(cin,branch);
-		 		break;
-		 case 4:
-			 cout<<"Enter the sem"<<endl;
-			 cin>>semester;
-			 break;
-		 }
-		 pack();
-		 write();
-		 pos=pos-101;
-		 fp1.open("Data10.txt");
-		 fp1.seekp(pos,ios::beg);
-		 fp1<<buffer;
+		cout<<"pos ="<<pos<<endl;
+		if(pos)
+		{
+			fp1.open("1.txt");
+			pos=pos-101;
+			fp1.seekp(pos,ios::beg);
+			fp1.put(del_mark);
+			flag=1;
+			cout<<"The position of the deleted record is: "<<pos<<endl;
+			p=new node;
+			p->address=pos;
+			cout<<"p->address"<<p->address<<endl;
+			p->link=NULL;
+			if(first==NULL)
+			{
+				cout<<"First is NULL"<<endl;
+				first=p;
+			}
+			else
+			{
+				node *q;
+				q=first;
+				while(q->link!=NULL)
+				{
+					cout<<"Available space is= "<<q->address;
+					q=q->link;
+				}
+			}
+		}
+		fp1.close();
+		buffer.empty();
+		if(!flag)
+			return 0;
+		else
+			return 1;
 
 	 }
 	
