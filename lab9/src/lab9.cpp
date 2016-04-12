@@ -1,4 +1,10 @@
-
+//============================================================================
+// Name        : lab9.cpp
+// Author      : Vatsala Y K
+// Version     : C++
+// Copyright   : Your copyright notice
+// Description : Reclaimimg space in records
+//============================================================================
 //------incomplete code------//
 
 
